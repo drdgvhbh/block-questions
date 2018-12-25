@@ -4,7 +4,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import debug from 'debug';
 import express from 'express';
-import posts from './routes/posts';
+import { routes } from './routes';
 import demux from './services/demux';
 import io from './utils/io';
 
@@ -12,7 +12,7 @@ const app = express();
 
 app.use(cors());
 
-app.use('/posts', posts());
+app.use('/posts', routes.posts);
 
 const server = app.listen(process.env.PORT, () =>
   debug('info')(
