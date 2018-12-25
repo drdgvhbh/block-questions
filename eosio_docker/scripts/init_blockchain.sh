@@ -53,11 +53,20 @@ cleos wallet import -n blogwallet --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHB
 # Active key for blogwallet wallet
 cleos wallet import -n blogwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmYnTetHgk1B3pjj7krT8N
 
+echo "=== setup wallet: questionwallet ==="
+# key for eosio account and export the generated password to a file for unlocking wallet later
+cleos wallet create -n boardwallet --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > board_wallet_password.txt
+# Owner key for blogwallet wallet
+cleos wallet import -n boardwallet --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHBAwebRXt94FmjyhXwL4K
+# Active key for blogwallet wallet
+cleos wallet import -n boardwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmYnTetHgk1B3pjj7krT8N
+
 # * Replace "blogwallet" with your own wallet name when you start your own project
 
 echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
+cleos create account eosio boardaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
 
 # * Replace "blogaccount" with your own account name when you start your own project
 
@@ -66,6 +75,7 @@ cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZ
 # $3 wallet that holds the keys for the account
 # $4 password for unlocking the wallet
 deploy_contract.sh blog blogaccount blogwallet $(cat blog_wallet_password.txt)
+deploy_contract.sh board boardaccount boardwallet $(cat board_wallet_password.txt)
 
 echo "=== create user accounts ==="
 # script for creating data into blockchain
