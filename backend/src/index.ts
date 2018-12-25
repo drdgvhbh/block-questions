@@ -6,7 +6,7 @@ import debug from 'debug';
 import express from 'express';
 import { routes } from './routes';
 import demux from './services/demux';
-import io from './utils/io';
+import * as io from './utils/io';
 
 const app = express();
 

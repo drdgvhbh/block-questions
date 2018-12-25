@@ -2,6 +2,7 @@ import { AbstractActionHandler } from 'demux'
 import mongoose from 'mongoose'
 import { Post, BlockIndexState } from '../../models'
 import io from '../../utils/io'
+import * as io from "../../utils/io";
 
 class ActionHandler extends AbstractActionHandler {
   constructor (updaters, effects, uri) {
