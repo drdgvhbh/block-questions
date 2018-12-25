@@ -1,5 +1,8 @@
-import cors from 'cors';
+// tslint:disable-next-line:no-import-side-effect no-submodule-imports
 import 'dotenv/config';
+
+import cors from 'cors';
+import debug from 'debug';
 import express from 'express';
 import posts from './routes/posts';
 import demux from './services/demux';
@@ -12,7 +15,9 @@ app.use(cors());
 app.use('/posts', posts());
 
 const server = app.listen(process.env.PORT, () =>
-  console.info(`Example app listening on port ${process.env.PORT}!`),
+  debug('info')(
+    `Example app listening on http://localhost:${process.env.PORT} !`,
+  ),
 );
 
 io.connect(server);
