@@ -1,0 +1,8 @@
+{
+    "signal": "SIGHUP",
+    "env": {
+        "DEBUG": "info"
+    },
+    "ext": "ts",
+    "exec": "ts-node src/index.ts"
+}
