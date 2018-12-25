@@ -1,4 +1,4 @@
-import { blockIndexState } from './blockIndexStateModel';
+import { blockIndexState, IBlockIndexState } from './blockIndexStateModel';
 import { post } from './post.model';
 
-export { blockIndexState as BlockIndexState, post as Post };
+export { IBlockIndexState, blockIndexState as BlockIndexState, post as Post };

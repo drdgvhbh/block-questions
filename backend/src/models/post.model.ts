@@ -2,6 +2,25 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+export interface IPostSchema extends mongoose.Document {
+  _id: {
+    author: string;
+    timestamp: number;
+  };
+  author: string;
+  content: string;
+  likes: {
+    default: number;
+    type: number;
+  };
+  postConfirmed: {
+    default: boolean;
+    type: boolean;
+  };
+  tag: string;
+  title: string;
+}
+
 const postSchema = new Schema({
   _id: {
     author: String,
@@ -22,4 +41,4 @@ const postSchema = new Schema({
   },
 });
 
-export const post = mongoose.model('Post', postSchema);
+export const post = mongoose.model<IPostSchema>('Post', postSchema);
