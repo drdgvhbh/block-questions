@@ -2,17 +2,13 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-let blockIndexState: mongoose.Model<mongoose.Document>;
+const blockIndexStateSchema = new Schema({
+  blockHash: String,
+  blockNumber: Number,
+  isReplay: Boolean,
+});
 
-try {
-  const blockIndexStateSchema = new Schema({
-    blockHash: String,
-    blockNumber: Number,
-    isReplay: Boolean,
-  });
-  blockIndexState = mongoose.model('BlockIndexState', blockIndexStateSchema);
-} catch (e) {
-  blockIndexState = mongoose.model('BlockIndexState');
-}
-
-export { blockIndexState };
+export const blockIndexState = mongoose.model(
+  'BlockIndexState',
+  blockIndexStateSchema,
+);
