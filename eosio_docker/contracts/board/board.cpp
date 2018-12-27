@@ -13,6 +13,15 @@ ACTION board::postquestion(name author, const std::string &title,
         question.content_hash = sha256(hash_data.c_str(), hash_data.length());
         question.author = author;
     });
+
+    action(permission_level(get_self(), name("active")), get_self(),
+           name("postquestqed"), std::make_tuple(author, title, content))
+        .send();
 }
 
-EOSIO_DISPATCH(board, (postquestion));
+ACTION board::postquestqed(name author, const std::string &title,
+                           const std::string &content) {
+    require_auth(get_self());
+}
+
+EOSIO_DISPATCH(board, (postquestion)(postquestqed));

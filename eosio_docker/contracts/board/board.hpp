@@ -12,6 +12,9 @@ CONTRACT board : public contract {
     ACTION postquestion(name author, const std::string &title,
                         const std::string &content);
 
+    ACTION postquestqed(name author, const std::string &title,
+                        const std::string &content);
+
    private:
     TABLE question {
         uint64_t primary_key_;

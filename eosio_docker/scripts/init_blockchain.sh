@@ -67,7 +67,7 @@ echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
 cleos create account eosio boardaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
-
+cleos set account permission boardaccount active --add-code
 # * Replace "blogaccount" with your own account name when you start your own project
 
 # $1 smart contract name 
