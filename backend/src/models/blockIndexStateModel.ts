@@ -1,10 +1,9 @@
+import { IndexState } from 'demux';
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-export interface IBlockIndexState extends mongoose.Document {
-  blockHash: string;
-  blockNumber: number;
+export interface IBlockIndexState extends mongoose.Document, IndexState {
   isReplay: boolean;
 }
 

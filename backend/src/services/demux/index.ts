@@ -1,13 +1,14 @@
 import { BaseActionWatcher } from 'demux';
-import { NodeosActionReader } from 'demux-eos';
+import { MongoActionReader, NodeosActionReader } from 'demux-eos';
 
 import { ActionHandler } from './actionHandler';
 
+import { updaters as updaters2 } from '../../questions';
 import effects from './effects';
 import updaters from './updaters';
 
 const actionHandler = new ActionHandler(
-  updaters,
+  [...updaters, ...updaters2],
   effects,
   process.env.MONGODB_URL || 'mongodb_url required',
 );
@@ -24,4 +25,4 @@ const actionWatcher = new BaseActionWatcher(
   BLOCK_INTERVAL, // Poll at twice the block interval for less latency
 );
 
-export default actionWatcher;
+export { actionWatcher };

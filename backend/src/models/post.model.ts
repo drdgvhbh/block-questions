@@ -9,14 +9,8 @@ export interface IPostSchema extends mongoose.Document {
   };
   author: string;
   content: string;
-  likes: {
-    default: number;
-    type: number;
-  };
-  postConfirmed: {
-    default: boolean;
-    type: boolean;
-  };
+  likes: number;
+  postConfirmed: boolean;
   tag: string;
   title: string;
 }

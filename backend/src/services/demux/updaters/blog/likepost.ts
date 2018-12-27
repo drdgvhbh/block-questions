@@ -1,7 +1,7 @@
 import { BlockInfo } from 'demux';
 import { IBlogState, IContext } from '../../types';
 
-async function likePost(
+export async function likePost(
   state: IBlogState,
   payload: any,
   blockInfo: BlockInfo,
@@ -14,5 +14,3 @@ async function likePost(
     )
     .exec();
 }
-
-export default likePost;

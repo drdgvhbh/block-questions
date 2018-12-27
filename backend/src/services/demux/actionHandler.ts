@@ -10,6 +10,7 @@ import {
 } from 'demux';
 import mongoose from 'mongoose';
 import { BlockIndexState, Post } from '../../models';
+import { Model as QuestionModel } from '../../questions';
 import * as io from '../../utils/io';
 import { IBlogState, IContext } from './types';
 
@@ -55,6 +56,7 @@ class ActionHandler extends AbstractActionHandler {
     const state = {
       blockIndexState: BlockIndexState,
       post: Post,
+      question: QuestionModel,
     };
 
     await handle(state, context);

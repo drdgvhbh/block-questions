@@ -1,7 +1,7 @@
 import { BlockInfo } from 'demux';
 import { IBlogState, IContext } from '../../types';
 
-function editPost(
+export function editPost(
   state: IBlogState,
   payload: any,
   blockInfo: BlockInfo,
@@ -19,5 +19,3 @@ function editPost(
   };
   context.socket.emit('editpost', post);
 }
-
-export default editPost;

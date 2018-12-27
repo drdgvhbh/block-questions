@@ -7,15 +7,11 @@ async function editPost(
   blockInfo: BlockInfo,
   context: IContext,
 ) {
-  try {
-    await state.post
-      .findByIdAndUpdate(
-        { timestamp: payload.data.timestamp, author: payload.data.author },
-        payload.data,
-      )
-      .exec();
-  } catch (err) {
-    console.trace(err);
-  }
+  await state.post
+    .findByIdAndUpdate(
+      { timestamp: payload.data.timestamp, author: payload.data.author },
+      payload.data,
+    )
+    .exec();
 }
-export default editPost;
+export { editPost };

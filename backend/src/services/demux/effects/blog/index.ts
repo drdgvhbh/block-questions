@@ -1,6 +1,6 @@
 import createPost from './createpost';
 import deletePost from './deletepost';
-import editPost from './editpost';
+import { editPost } from './editpost';
 import likePost from './likepost';
 
 const account = process.env.EOSIO_CONTRACT_ACCOUNT;

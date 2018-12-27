@@ -1,12 +1,24 @@
 import { BlockInfo } from 'demux';
+import { EosPayload } from 'demux-eos';
 import { IBlogState, IContext } from '../../types';
+
+interface CreatePostPayload extends EosPayload {
+  data: {
+    author: string;
+    content: string;
+    tag: string;
+    timestamp: number;
+    title: string;
+  };
+}
 
 async function createPost(
   state: IBlogState,
-  payload: any,
+  payload: CreatePostPayload,
   blockInfo: BlockInfo,
   context: IContext,
 ) {
+  console.log(payload);
   const Post = state.post;
 
   const duplicatePosts = await Post.find({
