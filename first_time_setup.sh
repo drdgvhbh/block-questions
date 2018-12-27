@@ -19,15 +19,15 @@ if [ ! -x "$(command -v docker)" ] ||
     exit
 fi
 
-# download eosio/eos-dev:v1.4.2 image
-echo "=== pull eosio/eos-dev image v1.4.2 from docker hub ==="
-docker pull eosio/eos-dev:v1.4.2
+# download eosio/eos-dev:v1.5.2 image
+echo "=== pull eosio/eos-dev image v1.5.2 from docker hub ==="
+docker pull eosio/eos-dev:v1.5.2
 
 # force remove the previous eosio container if it exists
 # create a clean data folder in the eosio_docker to preserve block data
 echo "=== setup/reset data for eosio_docker ==="
 docker stop eosio_blog_container || true && docker rm --force eosio_blog_container || true
-rm -rf "./eosio_docker/data"
+sudo rm -rf "./eosio_docker/data"
 mkdir -p "./eosio_docker/data"
 
 # download mongo:4.0 image
