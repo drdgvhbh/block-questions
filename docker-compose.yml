@@ -6,7 +6,7 @@ services:
     hostname: keosd
     command: /bin/bash -c "keosd --http-server-address keosd:8899"
     volumes:
-      - keosd-data-volume:/opt/eosio/bin/data-dir
+      - ./eosio/data:/data
     networks:
       eosio:
         aliases:
@@ -16,15 +16,21 @@ services:
     build: ./eosio
     hostname: nodeosd
     volumes:
-      - nodeos-data-volume:/opt/eosio/bin/data-dir
+      - ./eosio/data:/data
     networks:
       eosio:
         aliases:
           - nodeosd
 
-volumes:
-  nodeos-data-volume:
-  keosd-data-volume:
+  mongo:
+    ports:
+      - 27017:27017
+    hostname: mongo
+    image: mongo:4
+    networks:
+      eosio:
+        aliases:
+          - mongo
 
 networks:
   eosio:
