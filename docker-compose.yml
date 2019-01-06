@@ -3,4 +3,4 @@ version: "3"
 services:
   eosio:
     container_name: "eosio-block-questions"
-    build: ./eosio_docker
+    build: ./eosio
