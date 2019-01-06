@@ -5,7 +5,7 @@ import cors from 'cors';
 import debug from 'debug';
 import express from 'express';
 import { routes } from './routes';
-import { actionWatcher as demux } from './services/demux';
+import { actionReader, actionWatcher as demux } from './services/demux';
 import * as io from './utils/io';
 
 const app = express();
@@ -22,4 +22,8 @@ const server = app.listen(process.env.PORT, () =>
 
 io.connect(server);
 
-demux.watch();
+(async () => {
+  await actionReader.initialize();
+  console.log(':)');
+  demux.watch();
+})();

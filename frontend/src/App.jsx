@@ -82,7 +82,7 @@ class App extends Component {
       }));
       this.toggleCreate();
     } catch (err) {
-      console.error(err);
+      console.trace(err);
     }
   };
 
@@ -102,7 +102,7 @@ class App extends Component {
         posts: updatePostsForCreateAndEdit(prevState, post)
       }));
     } catch (err) {
-      console.error(err);
+      console.trace(err);
     }
   };
 
@@ -121,7 +121,7 @@ class App extends Component {
         posts: updatePostsForDelete(prevState, post)
       }));
     } catch (err) {
-      console.error(err);
+      console.trace(err);
     }
   };
 
@@ -137,7 +137,7 @@ class App extends Component {
         }
       );
     } catch (err) {
-      console.error(err);
+      console.trace(err);
     }
   };
 

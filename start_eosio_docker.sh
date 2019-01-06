@@ -13,7 +13,8 @@ fi
 
 echo "=== run docker container from the eosio/eos-dev image ==="
 docker run --rm --name eosio_blog_container -d \
--p 8888:8888 -p 9876:9876 \
+--net=host \
+-p 8888:8888 -p 9876:9876  \
 --mount type=bind,src="$(pwd)"/contracts,dst=/opt/eosio/bin/contracts \
 --mount type=bind,src="$(pwd)"/scripts,dst=/opt/eosio/bin/scripts \
 --mount type=bind,src="$(pwd)"/data,dst=/mnt/dev/data \

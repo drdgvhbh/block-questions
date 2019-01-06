@@ -5,6 +5,7 @@ import {
   AbstractActionHandler,
   Block,
   Effect,
+  HandlerVersion,
   IndexState,
   Updater,
 } from 'demux';
@@ -15,9 +16,9 @@ import * as io from '../../utils/io';
 import { IBlogState, IContext } from './types';
 
 class ActionHandler extends AbstractActionHandler {
-  public constructor(updaters: Updater[], effects: Effect[], uri: string) {
-    super(updaters, effects);
-    mongoose.connect(uri);
+  public constructor(handlerVersions: HandlerVersion[], uri: string) {
+    super(handlerVersions);
+    /*     mongoose.connect(uri);
 
     // CONNECTION EVENTS
     // Connection successful
@@ -44,7 +45,7 @@ class ActionHandler extends AbstractActionHandler {
         );
         process.exit(0);
       });
-    });
+    }); */
   }
 
   protected async handleWithState(
@@ -58,14 +59,17 @@ class ActionHandler extends AbstractActionHandler {
       post: Post,
       question: QuestionModel,
     };
-
+    // Console.log(state, context, '???');
+    // Console.log('handle!');
     await handle(state, context);
   }
 
   protected async loadIndexState(): Promise<IndexState> {
+    console.log('WTF?');
     let blockHash;
     let blockNumber;
-    const indexState = await BlockIndexState.findOne({}).exec();
+    // Const indexState = await BlockIndexState.findOne({}).exec();
+    /*     console.log(indexState, '??');
     if (indexState) {
       ({ blockHash, blockNumber } = indexState);
     }
@@ -73,12 +77,16 @@ class ActionHandler extends AbstractActionHandler {
       return {
         blockHash,
         blockNumber,
+        handlerVersionName: 'v1',
+        isReplay: false,
       };
-    }
+    } */
 
     return {
       blockHash: '',
-      blockNumber: 0,
+      blockNumber: 3,
+      handlerVersionName: 'v1',
+      isReplay: false,
     };
   }
 
@@ -91,7 +99,8 @@ class ActionHandler extends AbstractActionHandler {
     block: Block,
     isReplay: boolean,
   ) {
-    const { blockInfo } = block;
+    // Console.log(block);
+    /*     const { blockInfo } = block;
     await state.blockIndexState
       .update(
         {},
@@ -104,7 +113,7 @@ class ActionHandler extends AbstractActionHandler {
           upsert: true,
         },
       )
-      .exec();
+      .exec(); */
   }
 }
 

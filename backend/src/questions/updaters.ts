@@ -15,17 +15,20 @@ export class CreateQuestionUpdater implements Updater {
   public actionType: string;
 
   public constructor(contractAccount: string) {
-    this.actionType = `${contractAccount}::postquestion`;
+    console.log('HELLO?');
+    this.actionType = `boardaccount::postquestion`;
   }
 
   // tslint:disable-next-line:prefer-function-over-method
-  public async updater(
+  public async apply(
     state: QuestionState,
     payload: CreateQuestionPayload,
     blockInfo: BlockInfo,
     context: any,
   ): Promise<void> {
-    console.log(payload);
+    console.log('????');
+    console.log('RETARDIOS');
+    //  Console.log(payload);
     const { question } = state;
     const {
       data: { author, title, content },
@@ -35,7 +38,7 @@ export class CreateQuestionUpdater implements Updater {
       .update(`${author}${title}${content}`)
       .digest('hex');
 
-    const duplicateUserQuestions = await question
+    /*     const duplicateUserQuestions = await question
       .find({
         _id: id,
       })
@@ -54,6 +57,6 @@ export class CreateQuestionUpdater implements Updater {
       title,
     };
     const newQuestion = new Question(schema);
-    await newQuestion.save();
+    await newQuestion.save(); */
   }
 }

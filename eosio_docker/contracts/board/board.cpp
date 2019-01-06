@@ -22,6 +22,7 @@ ACTION board::postquestion(name author, const std::string &title,
 ACTION board::postquestqed(name author, const std::string &title,
                            const std::string &content) {
     require_auth(get_self());
+    require_recipient(author);
 }
 
 EOSIO_DISPATCH(board, (postquestion)(postquestqed));
