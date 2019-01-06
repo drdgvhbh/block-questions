@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
-keosd --http-server-address localhost:8899 &
-WAIT_HOSTS=localhost:8899 /wait
-WALLET_URL=http://localhost:8899
+WALLET_URL=http://keosd:8899
+WAIT_HOSTS=keosd:8899 /wait
 cleos --wallet-url $WALLET_URL  wallet create --file wallet_password.txt
 cleos --wallet-url $WALLET_URL wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 (nodeos -e -p eosio \
@@ -45,6 +43,5 @@ cleos --wallet-url $WALLET_URL create account eosio $PRODUCER_2 $PUBLIC_KEY $PUB
   --data-dir data/$PRODUCER_2) &
 while :
   do
-    echo "trash"
     sleep 1
 done

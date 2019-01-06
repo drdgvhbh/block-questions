@@ -1,6 +1,30 @@
 version: "3"
 
 services:
-  eosio:
+  keosd:
+    image: eosio/eos-dev:v1.5.2
+    hostname: keosd
+    command: /bin/bash -c "keosd --http-server-address keosd:8899"
+    volumes:
+      - keosd-data-volume:/opt/eosio/bin/data-dir
+    networks:
+      eosio:
+        aliases:
+          - keosd
+  nodeosd:
     container_name: "eosio-block-questions"
     build: ./eosio
+    hostname: nodeosd
+    volumes:
+      - nodeos-data-volume:/opt/eosio/bin/data-dir
+    networks:
+      eosio:
+        aliases:
+          - nodeosd
+
+volumes:
+  nodeos-data-volume:
+  keosd-data-volume:
+
+networks:
+  eosio:
