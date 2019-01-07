@@ -15,6 +15,9 @@ services:
     container_name: "eosio-block-questions"
     build: ./eosio
     hostname: nodeosd
+    environment:
+      - WALLET_URL=http://keosd:8899
+      - WAIT_HOSTS=keosd:8899 /wait
     volumes:
       - ./eosio/data:/data
     networks:

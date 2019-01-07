@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-WALLET_URL="http://keosd:8899"
-WAIT_HOSTS=keosd:8899 /wait
-
 DIR_TO_CHECK="data"
 WALLET_PASSWORD_FILE="data/wallet_password.txt"
 if [ -n "$(find "$DIR_TO_CHECK" -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
