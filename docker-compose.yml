@@ -20,6 +20,8 @@ services:
       - WAIT_HOSTS=keosd:8899 /wait
     volumes:
       - ./eosio/data:/data
+      - ./eosio/contracts:/user_contracts
+      - ./eosio/scripts:/scripts
     networks:
       eosio:
         aliases:
