@@ -15,7 +15,6 @@ export class CreateQuestionUpdater implements Updater {
   public actionType: string;
 
   public constructor(contractAccount: string) {
-    console.log('HELLO?');
     this.actionType = `boardaccount::postquestion`;
   }
 
@@ -26,9 +25,6 @@ export class CreateQuestionUpdater implements Updater {
     blockInfo: BlockInfo,
     context: any,
   ): Promise<void> {
-    console.log('????');
-    console.log('RETARDIOS');
-    //  Console.log(payload);
     const { question } = state;
     const {
       data: { author, title, content },

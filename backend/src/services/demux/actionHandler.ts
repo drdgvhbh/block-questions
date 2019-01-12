@@ -65,7 +65,6 @@ class ActionHandler extends AbstractActionHandler {
   }
 
   protected async loadIndexState(): Promise<IndexState> {
-    console.log('WTF?');
     let blockHash;
     let blockNumber;
     // Const indexState = await BlockIndexState.findOne({}).exec();
@@ -84,7 +83,7 @@ class ActionHandler extends AbstractActionHandler {
 
     return {
       blockHash: '',
-      blockNumber: 3,
+      blockNumber: 0,
       handlerVersionName: 'v1',
       isReplay: false,
     };

@@ -24,6 +24,5 @@ io.connect(server);
 
 (async () => {
   await actionReader.initialize();
-  console.log(':)');
   demux.watch();
 })();

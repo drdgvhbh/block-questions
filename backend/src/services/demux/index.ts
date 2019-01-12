@@ -11,7 +11,6 @@ export class CreateQuestionEffector implements Effect {
   public actionType: string;
 
   public constructor(contractAccount: string) {
-    console.log('HELLO?');
     this.actionType = `boardaccount::postquestion`;
   }
 
