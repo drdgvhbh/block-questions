@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-import EOSIOClient from "utils/eosio-client";
-import IOClient from "utils/io-client";
+import EOSIOClient from './utils/eosio-client';
+import IOClient from './utils/io-client';
 import {
   updatePostsForCreateAndEdit,
   updatePostsForLike,
-  updatePostsForDelete
-} from "utils/posts-updater";
-import CreatePost from "CreatePost/CreatePost";
-import Posts from "Posts/Posts";
+  updatePostsForDelete,
+} from './utils/posts-updater';
+import CreatePost from './CreatePost/CreatePost';
+import Posts from './Posts/Posts';
 
 class App extends Component {
   state = {
     createOpen: false,
-    posts: []
+    posts: [],
   };
 
   // Instantiate shared eosjs helper and socket io helper
@@ -28,24 +28,24 @@ class App extends Component {
   // Enable Realtime updates via Socket.io
   async componentDidMount() {
     this.loadPosts();
-    this.io.onMessage("createpost", post => {
-      this.setState(prevState => ({
-        posts: updatePostsForCreateAndEdit(prevState, post)
+    this.io.onMessage('createpost', (post) => {
+      this.setState((prevState) => ({
+        posts: updatePostsForCreateAndEdit(prevState, post),
       }));
     });
-    this.io.onMessage("editpost", post => {
-      this.setState(prevState => ({
-        posts: updatePostsForCreateAndEdit(prevState, post)
+    this.io.onMessage('editpost', (post) => {
+      this.setState((prevState) => ({
+        posts: updatePostsForCreateAndEdit(prevState, post),
       }));
     });
-    this.io.onMessage("deletepost", post => {
-      this.setState(prevState => ({
-        posts: updatePostsForDelete(prevState, post)
+    this.io.onMessage('deletepost', (post) => {
+      this.setState((prevState) => ({
+        posts: updatePostsForDelete(prevState, post),
       }));
     });
-    this.io.onMessage("likepost", post => {
-      this.setState(prevState => ({
-        posts: updatePostsForLike(prevState, post)
+    this.io.onMessage('likepost', (post) => {
+      this.setState((prevState) => ({
+        posts: updatePostsForLike(prevState, post),
       }));
     });
   }
@@ -57,28 +57,28 @@ class App extends Component {
   };
 
   // Create a post
-  createPost = async post => {
+  createPost = async (post) => {
     try {
       const newPost = {
         ...post,
         _id: {
           timestamp: Math.floor(Date.now() / 1000),
-          author: process.env.REACT_APP_EOSIO_ACCOUNT
+          author: process.env.REACT_APP_EOSIO_ACCOUNT,
         },
-        author: process.env.REACT_APP_EOSIO_ACCOUNT
+        author: process.env.REACT_APP_EOSIO_ACCOUNT,
       };
 
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
-        "createpost",
+        'createpost',
         {
           timestamp: newPost._id.timestamp,
           author: newPost._id.author,
-          ...post
-        }
+          ...post,
+        },
       );
-      this.setState(prevState => ({
-        posts: updatePostsForCreateAndEdit(prevState, newPost)
+      this.setState((prevState) => ({
+        posts: updatePostsForCreateAndEdit(prevState, newPost),
       }));
       this.toggleCreate();
     } catch (err) {
@@ -87,19 +87,19 @@ class App extends Component {
   };
 
   // Edit a post
-  editPost = async post => {
+  editPost = async (post) => {
     try {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
-        "editpost",
+        'editpost',
         {
           timestamp: post._id.timestamp,
           author: post._id.author,
-          ...post
-        }
+          ...post,
+        },
       );
-      this.setState(prevState => ({
-        posts: updatePostsForCreateAndEdit(prevState, post)
+      this.setState((prevState) => ({
+        posts: updatePostsForCreateAndEdit(prevState, post),
       }));
     } catch (err) {
       console.trace(err);
@@ -107,18 +107,18 @@ class App extends Component {
   };
 
   // Delete a post
-  deletePost = async post => {
+  deletePost = async (post) => {
     try {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
-        "deletepost",
+        'deletepost',
         {
           timestamp: post._id.timestamp,
-          author: post._id.author
-        }
+          author: post._id.author,
+        },
       );
-      this.setState(prevState => ({
-        posts: updatePostsForDelete(prevState, post)
+      this.setState((prevState) => ({
+        posts: updatePostsForDelete(prevState, post),
       }));
     } catch (err) {
       console.trace(err);
@@ -126,15 +126,15 @@ class App extends Component {
   };
 
   // Like a post
-  likePost = async post => {
+  likePost = async (post) => {
     try {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
-        "likepost",
+        'likepost',
         {
           timestamp: post._id.timestamp,
-          author: post._id.author
-        }
+          author: post._id.author,
+        },
       );
     } catch (err) {
       console.trace(err);
@@ -143,8 +143,8 @@ class App extends Component {
 
   // Toggle if create window is open
   toggleCreate = () => {
-    this.setState(prevState => ({
-      createOpen: !prevState.createOpen
+    this.setState((prevState) => ({
+      createOpen: !prevState.createOpen,
     }));
   };
 
@@ -152,7 +152,7 @@ class App extends Component {
     return (
       <div
         className={`layoutStandard ${
-          this.state.createOpen ? "createOpen" : ""
+          this.state.createOpen ? 'createOpen' : ''
         }`}
       >
         <div className="logo">Hackathon Starter</div>
@@ -173,6 +173,6 @@ class App extends Component {
     );
   }
 }
-App.displayName = "App"; // Tell React Dev Tools the component name
+App.displayName = 'App'; // Tell React Dev Tools the component name
 
 export default App;

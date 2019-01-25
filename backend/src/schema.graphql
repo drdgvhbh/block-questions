@@ -1,0 +1,10 @@
+type Question {
+    id: String!
+    author: String!
+    title: String!
+    content: String!
+}
+
+type Query {
+    getQuestion(id: String!): Question
+}

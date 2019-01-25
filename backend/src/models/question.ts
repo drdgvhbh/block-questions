@@ -19,4 +19,4 @@ export interface QuestionState extends MongooseState {
   question: mongoose.Model<Schema>;
 }
 
-export const Model = mongoose.model<Schema>('Question', schema);
+export const Model = mongoose.model<Schema>('Question', schema, 'questions');

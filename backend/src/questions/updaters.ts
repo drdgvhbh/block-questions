@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { BlockInfo, Updater } from 'demux';
 import { EosPayload } from 'demux-eos';
-import { Model as Question, QuestionState, Schema } from './model';
+import { Model as Question, QuestionState, Schema } from '../models/question';
 
 interface CreateQuestionPayload extends EosPayload {
   data: {
@@ -14,8 +14,8 @@ interface CreateQuestionPayload extends EosPayload {
 export class CreateQuestionUpdater implements Updater {
   public actionType: string;
 
-  public constructor(contractAccount: string) {
-    this.actionType = `boardaccount::postquestion`;
+  public constructor(actionType: string) {
+    this.actionType = actionType;
   }
 
   // tslint:disable-next-line:prefer-function-over-method
@@ -23,9 +23,8 @@ export class CreateQuestionUpdater implements Updater {
     state: QuestionState,
     payload: CreateQuestionPayload,
     blockInfo: BlockInfo,
-    context: any,
+    context: {},
   ): Promise<void> {
-    const { question } = state;
     const {
       data: { author, title, content },
     } = payload;
@@ -34,25 +33,28 @@ export class CreateQuestionUpdater implements Updater {
       .update(`${author}${title}${content}`)
       .digest('hex');
 
-    /*     const duplicateUserQuestions = await question
-      .find({
-        _id: id,
-      })
-      .exec();
-
-    if (duplicateUserQuestions.length !== 0) {
-      // TODO: do something with duplicate
-      console.log('duplicate!', duplicateUserQuestions);
-      return;
-    }
-
     const schema: Partial<Schema> = {
       _id: id,
       author,
       content,
       title,
     };
-    const newQuestion = new Question(schema);
-    await newQuestion.save(); */
+
+    console.log(blockInfo.blockNumber);
+
+    await new Promise<Schema | null>((res, rej) => {
+      Question.findOneAndUpdate(
+        { _id: id },
+        schema,
+        { upsert: true, new: true },
+        (err, doc) => {
+          if (err) {
+            rej(err);
+          }
+          console.log(doc);
+          res(doc);
+        },
+      );
+    });
   }
 }

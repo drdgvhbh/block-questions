@@ -1,42 +1,24 @@
 import { BaseActionWatcher, Effect } from 'demux';
 import { MongoActionReader } from 'demux-eos';
+import mongoose from 'mongoose';
 
 import { ActionHandler } from './actionHandler';
 
-import { updaters as updaters2 } from '../../questions';
-import effects from './effects';
-import updaters from './updaters';
+import { effectors, updaters } from '../../questions';
 
-export class CreateQuestionEffector implements Effect {
-  public actionType: string;
-
-  public constructor(contractAccount: string) {
-    this.actionType = `boardaccount::postquestion`;
-  }
-
-  // tslint:disable-next-line:prefer-function-over-method
-  public async run(payload: any, blockInfo: any, context: any): Promise<void> {
-    console.log('effect');
-    // Console.log(payload);
-  }
-}
-
-const actionHandler = new ActionHandler(
-  [
-    {
-      effects: [new CreateQuestionEffector('derp')],
-      updaters: [...updaters2],
-      versionName: 'v1',
-    },
-  ],
-  process.env.MONGODB_URL || 'mongodb_url required',
-);
+const actionHandler = new ActionHandler([
+  {
+    effects: [...effectors],
+    updaters: [...updaters],
+    versionName: 'v1',
+  },
+]);
 
 const actionReader = new MongoActionReader(
   'mongodb://127.0.0.1:27017',
   3,
   false,
-  1000000,
+  Number.MAX_SAFE_INTEGER,
   'EOS',
 );
 
