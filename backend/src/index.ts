@@ -27,8 +27,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/blockQuestions');
 const questionRepository = new QuestionRepository(QuestionModel);
 
 const root = {
-  getQuestion: questionRepository.getQuestion,
-  getQuestions: questionRepository.getQuestions,
+  question: questionRepository.getQuestion,
+  questions: questionRepository.getQuestions,
 };
 
 app.use(

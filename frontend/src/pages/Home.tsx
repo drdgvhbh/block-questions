@@ -7,6 +7,26 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+
+interface Question {
+  title: string;
+  content: string;
+}
+
+interface GetQuestionsQuery {
+  questions: Question[];
+}
+
+const GET_QUESTIONS = gql`
+  {
+    questions {
+      title
+      content
+    }
+  }
+`;
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -30,6 +50,15 @@ const Home = (props: HomeProps) => {
           ask question
         </Button>
       </Link>
+      <Query query={GET_QUESTIONS}>
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
+
+          const { questions } = data as GetQuestionsQuery;
+          return questions.map((question) => <div>${question.title}</div>);
+        }}
+      </Query>
     </React.Fragment>
   );
 };

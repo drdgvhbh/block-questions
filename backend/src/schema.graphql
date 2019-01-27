@@ -6,6 +6,6 @@ type Question {
 }
 
 type Query {
-    getQuestion(id: String!): Question
-    getQuestions: [Question!]!
+    question(id: String!): Question
+    questions: [Question!]!
 }
