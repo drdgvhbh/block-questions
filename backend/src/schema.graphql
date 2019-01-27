@@ -7,4 +7,5 @@ type Question {
 
 type Query {
     getQuestion(id: String!): Question
+    getQuestions: [Question!]!
 }

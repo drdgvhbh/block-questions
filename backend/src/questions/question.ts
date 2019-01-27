@@ -1,5 +1,5 @@
 export class Question {
-  constructor(
+  public constructor(
     public readonly id: string,
     public readonly author: string,
     public readonly title: string,

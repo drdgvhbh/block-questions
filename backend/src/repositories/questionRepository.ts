@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import { Question } from '../entities/Question';
-import { Schema } from '../questions';
 import { boundMethod } from 'autobind-decorator';
+import mongoose from 'mongoose';
+import { Schema } from '../questions';
+import { Question } from '../questions/question';
 
 export class QuestionRepository {
-  constructor(private model: mongoose.Model<Schema, {}>) {}
+  public constructor(private model: mongoose.Model<Schema, {}>) {}
 
   @boundMethod
   public async getQuestion(args: {
@@ -20,5 +20,15 @@ export class QuestionRepository {
     const { id: id_, author, title, content } = result;
 
     return new Question(id_, author, title, content);
+  }
+
+  @boundMethod
+  public async getQuestions(): Promise<Question[]> {
+    const result = await this.model.find();
+
+    return result.map(
+      ({ id: id_, author, title, content }) =>
+        new Question(id_, author, title, content),
+    );
   }
 }

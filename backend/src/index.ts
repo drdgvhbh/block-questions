@@ -10,10 +10,8 @@ import { importSchema } from 'graphql-import';
 import mongoose from 'mongoose';
 import path from 'path';
 import { Model as QuestionModel } from './questions';
-import { QuestionRepository } from './repositories/QuestionRepository';
-import { routes } from './routes';
+import { QuestionRepository } from './repositories/questionRepository';
 import { actionReader, actionWatcher as demux } from './services/demux';
-import * as io from './utils/io';
 
 const app = express();
 
@@ -30,6 +28,7 @@ const questionRepository = new QuestionRepository(QuestionModel);
 
 const root = {
   getQuestion: questionRepository.getQuestion,
+  getQuestions: questionRepository.getQuestions,
 };
 
 app.use(
@@ -40,15 +39,12 @@ app.use(
     schema,
   }),
 );
-app.use('/posts', routes.posts);
 
-const server = app.listen(process.env.PORT, () =>
+app.listen(process.env.PORT, () =>
   debug('info')(
     `Example app listening on http://localhost:${process.env.PORT} !`,
   ),
 );
-
-io.connect(server);
 
 (async () => {
   await actionReader.initialize();

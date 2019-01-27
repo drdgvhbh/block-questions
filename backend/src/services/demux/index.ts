@@ -1,6 +1,5 @@
-import { BaseActionWatcher, Effect } from 'demux';
+import { BaseActionWatcher } from 'demux';
 import { MongoActionReader } from 'demux-eos';
-import mongoose from 'mongoose';
 
 import { ActionHandler } from './actionHandler';
 
@@ -14,9 +13,11 @@ const actionHandler = new ActionHandler([
   },
 ]);
 
+const STARTING_BLOCK = 3;
+
 const actionReader = new MongoActionReader(
   'mongodb://127.0.0.1:27017',
-  3,
+  STARTING_BLOCK,
   false,
   Number.MAX_SAFE_INTEGER,
   'EOS',

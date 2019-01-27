@@ -2,14 +2,11 @@
 
 import { AbstractActionHandler, Block } from 'demux';
 import mongoose from 'mongoose';
-import { BlockIndexState, IBlockIndexState, Post } from '../../models';
-import { IPostSchema } from '../../models/post.model';
+import { BlockIndexState, IBlockIndexState } from '../../models';
 import {
   Model as QuestionModel,
   Schema as QuestionSchema,
 } from '../../questions';
-import * as io from '../../utils/io';
-import { IBlogState, IContext } from './types';
 
 interface StateHistory {
   [key: number]: any;
@@ -23,16 +20,13 @@ interface State {
     handlerVersionName: string;
     isReplay: boolean;
   };
-  post: mongoose.Model<IPostSchema, {}>;
   question: mongoose.Model<QuestionSchema, {}>;
   totalTransfers: 0;
   volumeBySymbol: { [key: string]: any };
 }
 
 class ActionHandler extends AbstractActionHandler {
-  private context = {
-    socket: io.getSocket(),
-  };
+  private context = {};
   private state: State = {
     blockIndexState: BlockIndexState,
     indexState: {
@@ -41,7 +35,6 @@ class ActionHandler extends AbstractActionHandler {
       handlerVersionName: 'v1',
       isReplay: false,
     },
-    post: Post,
     question: QuestionModel,
     totalTransfers: 0,
     volumeBySymbol: {},
@@ -81,7 +74,7 @@ class ActionHandler extends AbstractActionHandler {
   }
 
   protected async handleWithState(
-    handle: (state: IBlogState, context?: IContext) => void,
+    handle: (state: any, context?: any) => void,
   ): Promise<void> {
     await handle(this.state, this.context);
     const { blockNumber } = this.state.indexState;

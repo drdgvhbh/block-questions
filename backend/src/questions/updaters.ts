@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { BlockInfo, Updater } from 'demux';
 import { EosPayload } from 'demux-eos';
-import { Model as Question, QuestionState, Schema } from '../models/question';
+import { Model as Question, QuestionState, Schema } from './mongoose';
 
 interface CreateQuestionPayload extends EosPayload {
   data: {

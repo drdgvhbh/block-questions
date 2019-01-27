@@ -10,7 +10,20 @@
         "typedef": false,
         "only-arrow-functions": false,
         "variable-name": false,
-        "interface-name": false
+        "interface-name": false,
+        "no-parameter-properties": false,
+        "no-dynamic-delete": {
+            "severity": "warn"
+        },
+        "no-any": {
+            "severity": "warn"
+        },
+        "no-console": {
+            "severity": "warn"
+        },
+        "prefer-function-over-method": {
+            "severity": "warn"
+        }
     },
     "rulesDirectory": []
 }
