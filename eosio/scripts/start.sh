@@ -69,6 +69,7 @@ done
   --mongodb-uri mongodb://mongo:27017/EOS \
   --mongodb-update-via-block-num true) &
 /scripts/deploy_contracts.sh /user_contracts/build/ $(cat /data/public_key.txt) $(cat /data/wallet_password.txt)
+cleos --wallet-url $WALLET_URL create account eosio drdgvhbh EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5 EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5
 while :
   do
     sleep 1

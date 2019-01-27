@@ -10,7 +10,7 @@ import ScatterJS from 'scatterjs-core';
 import ScatterEOS from 'scatterjs-plugin-eosjs2';
 import { JsonRpc, Api } from 'eosjs';
 
-ScatterJS.plugins(new ScatterEOS());
+/* ScatterJS.plugins(new ScatterEOS());
 
 const network = ScatterJS.Network.fromJson({
   blockchain: process.env.REACT_APP_BLOCKCHAIN || 'eos',
@@ -67,7 +67,7 @@ ScatterJS.connect('YourAppName', { network }).then((connected) => {
         console.error('error: ', err);
       });
   });
-});
+}); */
 
 ReactDOM.render(<App client={client} />, document.getElementById('root'));
 registerServiceWorker();
