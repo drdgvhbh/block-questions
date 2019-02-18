@@ -2,8 +2,11 @@
 
 DIR_TO_CHECK="data"
 WALLET_PASSWORD_FILE="data/wallet_password.txt"
-cleos --wallet-url $WALLET_URL wallet create --file $WALLET_PASSWORD_FILE
-cleos --wallet-url $WALLET_URL wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+
+cleos_="cleos --wallet-url $WALLET_URL"
+
+$cleos_ wallet create --file $WALLET_PASSWORD_FILE
+$cleos_ wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 (nodeos -e -p eosio \
 --http-server-address 0.0.0.0:8888 \
 --plugin eosio::chain_api_plugin \
@@ -25,14 +28,14 @@ WALLET_KEY_FILE="data/wallet_key.txt"
 PUBLIC_KEY_FILE="data/public_key.txt"
 PRIVATE_KEY_FILE="data/private_key.txt"
 PRODUCER_NAME="producer"
-cleos --wallet-url $WALLET_URL set contract eosio contracts/eosio.bios
-cleos create key --file $WALLET_KEY_FILE
+$cleos_ set contract eosio contracts/eosio.bios
+$cleos_ create key --file $WALLET_KEY_FILE
 PRIVATE_KEY=$(head $WALLET_KEY_FILE -n 1 | grep -oE '[^ ]+$')
 PUBLIC_KEY=$(sed "2q;d" $WALLET_KEY_FILE | grep -oE '[^ ]+$')
 echo $PUBLIC_KEY > $PUBLIC_KEY_FILE
 echo $PRIVATE_KEY > $PRIVATE_KEY_FILE
-cleos --wallet-url $WALLET_URL wallet import --private-key $PRIVATE_KEY
-cleos --wallet-url $WALLET_URL create account eosio $PRODUCER_NAME $PUBLIC_KEY $PUBLIC_KEY
+$cleos_ wallet import --private-key $PRIVATE_KEY
+$cleos_ create account eosio $PRODUCER_NAME $PUBLIC_KEY $PUBLIC_KEY
 (nodeos --producer-name $PRODUCER_NAME \
   --plugin eosio::chain_api_plugin \
   --plugin eosio::chain_plugin \
@@ -48,10 +51,14 @@ cleos --wallet-url $WALLET_URL create account eosio $PRODUCER_NAME $PUBLIC_KEY $
   --config-dir data/$PRODUCER_NAME \
   --data-dir data/$PRODUCER_NAME) &
 
-cleos --wallet-url $WALLET_URL \
+$cleos_ \
   push action eosio setprods "{ \"schedule\": [{\"producer_name\": \"$PRODUCER_NAME\",\"block_signing_key\": \"$PUBLIC_KEY\"}]}" -p eosio@active
 MONGO_PRODUCER_NAME=mongo
-cleos --wallet-url $WALLET_URL create account eosio $MONGO_PRODUCER_NAME $PUBLIC_KEY $PUBLIC_KEY
+$cleos_ create account eosio $MONGO_PRODUCER_NAME $PUBLIC_KEY $PUBLIC_KEY
+$cleos_ wallet import --private-key 5JhvmKGKifY7iaGxuJd47vG3BDx8yGGFcAktipgzEvgfc39aMF6
+$cleos_ create account eosio eosio.token EOS6CGbqzm8ECZMBXHL4yCEdUSNTLkEXYK9n5qNnVc3n58GoZULTT
+$cleos_ set contract eosio.token contracts/eosio.token -p eosio.token
+$cleos_ push action eosio.token create '["eosio", "125000 OQM"]' -p eosio.token@active
 until curl mongo:27017
 do
   sleep 1s
@@ -69,7 +76,7 @@ done
   --mongodb-uri mongodb://mongo:27017/EOS \
   --mongodb-update-via-block-num true) &
 /scripts/deploy_contracts.sh /user_contracts/build/ $(cat /data/public_key.txt) $(cat /data/wallet_password.txt)
-cleos --wallet-url $WALLET_URL create account eosio drdgvhbh EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5 EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5
+$cleos_ create account eosio drdgvhbh EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5 EOS6UyyNA26cgEBwco2PNGANYRURdfQT3G5B96fagQWPacgbmj8W5
 while :
   do
     sleep 1

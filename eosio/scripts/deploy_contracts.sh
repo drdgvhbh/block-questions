@@ -12,6 +12,5 @@ for contract in $COMPILED_CONTRACTS_DIR*.wasm; do
   cleos --wallet-url $WALLET_URL create account eosio $contract_name $PUBLIC_KEY
   cleos --wallet-url $WALLET_URL set account permission $contract_name active --add-code
   ls $COMPILED_CONTRACTS_DIR$contract_name.wasm
-  cleos --wallet-url $WALLET_URL set contract $contract_name "$COMPILED_CONTRACTS_DIR" board.wasm board.abi --permission $contract_name@active
-  cleos --wallet-url $WALLET_URL push action board postquestion '["board", "yolo", "swag"]' -p board@active
+  cleos --wallet-url $WALLET_URL set contract $contract_name "$COMPILED_CONTRACTS_DIR" $contract_name.wasm $contract_name.abi --permission $contract_name@active
 done

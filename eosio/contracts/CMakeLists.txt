@@ -8,3 +8,5 @@ add_contract(board board board/board.cpp)
 
 ### add the path to where the ricardian contracts/clauses are found
 target_compile_options(board.wasm PUBLIC -R${CMAKE_CURRENT_SOURCE_DIR}/board)
+
+add_subdirectory(tokensupply)
