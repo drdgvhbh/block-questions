@@ -1,0 +1,30 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2f1bd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2f1bd.dir/build.make CMakeFiles/cmTC_2f1bd.dir/build
+make[1]: Entering directory '/home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2f1bd.dir/testCCompiler.c.o
+/usr/bin/eosio-cc    -o CMakeFiles/cmTC_2f1bd.dir/testCCompiler.c.o   -c /home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_2f1bd
+/home/drd/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f1bd.dir/link.txt --verbose=1
+/usr/bin/eosio-cc      CMakeFiles/cmTC_2f1bd.dir/testCCompiler.c.o  -o cmTC_2f1bd 
+clang-7: warning: CMakeFiles/cmTC_2f1bd.dir/testCCompiler.c.o: 'linker' input unused [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-ffreestanding' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-fno-builtin' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-fno-threadsafe-statics' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-D BOOST_DISABLE_ASSERTS' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-D BOOST_EXCEPTION_DISABLE' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-Xclang -load' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-Xclang /usr/opt/eosio.cdt/1.4.1/bin/LLVMEosioApply.so' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-fplugin=/usr/opt/eosio.cdt/1.4.1/bin/eosio_plugin.so' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-mllvm -use-cfl-aa-in-codegen=both' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-I /usr/opt/eosio.cdt/1.4.1/bin/../include/libcxx' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-I /usr/opt/eosio.cdt/1.4.1/bin/../include/libc' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-I /usr/opt/eosio.cdt/1.4.1/bin/../include' [-Wunused-command-line-argument]
+clang-7: warning: argument unused during compilation: '-O3' [-Wunused-command-line-argument]
+make[1]: *** [CMakeFiles/cmTC_2f1bd.dir/build.make:87: cmTC_2f1bd] Error 255
+make[1]: Leaving directory '/home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_2f1bd/fast] Error 2
+
+

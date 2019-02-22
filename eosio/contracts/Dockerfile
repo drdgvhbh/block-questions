@@ -22,10 +22,9 @@ RUN mkdir contracts
 WORKDIR /
 COPY eosfactory /eosfactory
 WORKDIR /eosfactory
+RUN cat eosfactory/core/errors.py
 RUN echo "{ \"EOSIO_CONTRACT_WORKSPACE\": \"/home/contracts\"}" > config.json
 RUN echo | ./install.sh
-
-RUN pip3 install typing_extensions
 
 WORKDIR /home/contracts
 

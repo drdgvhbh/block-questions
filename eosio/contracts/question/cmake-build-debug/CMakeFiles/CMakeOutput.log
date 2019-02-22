@@ -1,0 +1,29 @@
+The system is: Linux - 4.18.0-15-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/eosio-cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+/usr/opt/eosio.cdt/1.4.1/bin/wasm-ld: error: undefined symbol: apply
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/3.13.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/eosio-cpp 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+/usr/opt/eosio.cdt/1.4.1/bin/wasm-ld: error: undefined symbol: apply
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is Clang, found in "/home/drd/Documents/Projects/block_questions/eosio/contracts/question/cmake-build-debug/CMakeFiles/3.13.2/CompilerIdCXX/a.out"
+
